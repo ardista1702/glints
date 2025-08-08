@@ -23,15 +23,16 @@ func isPossibleZeroSum(nums []int) bool{
 	dp := new(map[int]bool)
 	*dp= make(map[int]bool)
 	(*dp)[0] = true
-
+	nextDp := new(map[int]bool)
+	*nextDp = make(map[int]bool)
+	
 	for _,num := range nums {
-		nextDp := new(map[int]bool)
 		*nextDp = make(map[int]bool)
 		for sum := range *dp {
 			(*nextDp)[sum + num] = true
 			(*nextDp)[sum - num] = true
 		}
-		dp = nextDp
+		dp,nextDp = nextDp,dp
 	}
 	_,found := (*dp)[0]
 	return found
