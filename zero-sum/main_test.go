@@ -23,7 +23,7 @@ func TestIsPossibleZeroSum(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			data := extractData(tc.input)
-			result := isPossibleZeroSum(data, 0, 0)
+			result := isPossibleZeroSum(data)
 			if result != tc.expected {
 				t.Errorf("Expected %v, got %v", tc.expected, result)
 			}

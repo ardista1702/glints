@@ -6,18 +6,33 @@ import (
 )
 
 
-func isPossibleZeroSum(nums []int,start int,sum int) bool {
-	if start == len(nums){
-		return  sum == 0
-	}
-	if isPossibleZeroSum(nums,start + 1,sum + nums[start]){
-		return true
-	}
+// func isPossibleZeroSum(nums []int,start int,sum int) bool {
+// 	if start == len(nums){
+// 		return  sum == 0
+// 	}
+// 	if isPossibleZeroSum(nums,start + 1,sum + nums[start]){
+// 		return true
+// 	}
 	
-	if isPossibleZeroSum(nums,start+1,sum-nums[start]){
-		return true
+// 	if isPossibleZeroSum(nums,start+1,sum-nums[start]){
+// 		return true
+// 	}
+// 	return false
+// }
+func isPossibleZeroSum(nums []int) bool{
+	dp:= make(map[int]bool)
+	dp[0] = true
+
+	for _,num := range nums {
+		nextDp := make(map[int]bool)
+		for sum := range dp {
+			nextDp[sum + num] = true
+			nextDp[sum - num] = true
+		}
+		dp = nextDp
 	}
-	return false
+	_,found := dp[0]
+	return found
 }
 
 
