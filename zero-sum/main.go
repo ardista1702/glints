@@ -20,18 +20,20 @@ import (
 // 	return false
 // }
 func isPossibleZeroSum(nums []int) bool{
-	dp:= make(map[int]bool)
-	dp[0] = true
+	dp := new(map[int]bool)
+	*dp= make(map[int]bool)
+	(*dp)[0] = true
 
 	for _,num := range nums {
-		nextDp := make(map[int]bool)
-		for sum := range dp {
-			nextDp[sum + num] = true
-			nextDp[sum - num] = true
+		nextDp := new(map[int]bool)
+		*nextDp = make(map[int]bool)
+		for sum := range *dp {
+			(*nextDp)[sum + num] = true
+			(*nextDp)[sum - num] = true
 		}
 		dp = nextDp
 	}
-	_,found := dp[0]
+	_,found := (*dp)[0]
 	return found
 }
 
